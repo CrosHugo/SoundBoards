@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundboard Electron</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>Soundboard</h1>
+      <div class="controls">
+        <button id="add-sound-btn">Ajouter un son</button>
+        <button id="edit-mode-btn">Mode édition</button>
+        <button id="categories-btn">Catégories</button>
+        <button id="keyboard-btn">Raccourcis</button>
+      </div>
+    </header>
+
+    <main>
+      <div id="categories-container">
+        <!-- Les catégories seront ajoutées ici dynamiquement -->
+      </div>
+      <div id="soundboard-container">
+        <!-- Les boutons de sons seront ajoutés ici dynamiquement -->
+      </div>
+    </main>
+
+    <div id="config-panel" class="hidden">
+      <h2>Configuration</h2>
+      <div id="config-content">
+        <!-- Le contenu de configuration sera ajouté ici dynamiquement -->
+      </div>
+      <div class="config-controls">
+        <button id="save-config-btn">Sauvegarder</button>
+        <button id="close-config-btn">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="theme-toggle">🌙</div>
+
+  <!-- Modal pour l'ajout et l'édition de sons -->
+  <div id="sound-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Ajouter un son</h3>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="sound-form">
+          <div class="form-group">
+            <label for="sound-file">Fichier audio</label>
+            <div class="file-input-container">
+              <input type="file" id="sound-file" accept=".mp3,.wav,.ogg">
+              <button type="button" id="browse-btn">Parcourir</button>
+            </div>
+            <span id="selected-file">Aucun fichier sélectionné</span>
+          </div>
+          <div class="form-group">
+            <label for="sound-name">Nom du son</label>
+            <input type="text" id="sound-name" placeholder="Nom affiché">
+          </div>
+          <div class="form-group">
+            <label for="sound-icon">Icône</label>
+            <input type="text" id="sound-icon" placeholder="Emoji ou caractère">
+          </div>
+          <div class="form-group">
+            <label for="sound-category">Catégorie</label>
+            <select id="sound-category">
+              <option value="">Sans catégorie</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sound-shortcut">Raccourci clavier</label>
+            <input type="text" id="sound-shortcut" placeholder="Appuyez sur une touche" readonly>
+          </div>
+          <div class="form-group">
+            <label for="sound-color">Couleur</label>
+            <input type="color" id="sound-color">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cancel-sound">Annuler</button>
+        <button id="save-sound">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script pour Howler.js via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  
+  <!-- Chargement des scripts -->
+  <script src="js/soundboard.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

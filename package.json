@@ -1,0 +1,34 @@
+{
+  "name": "electron-soundboard",
+  "version": "1.0.0",
+  "description": "Une application soundboard avec Electron",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "soundboard"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^26.0.0",
+    "electron-builder": "^24.4.0"
+  },
+  "dependencies": {
+    "howler": "^2.2.3"
+  },
+  "build": {
+    "appId": "com.yourname.soundboard",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ]
+  }
+}
