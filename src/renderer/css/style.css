@@ -505,3 +505,60 @@
   .stop-btn.active {
     animation: blink 1s infinite;
   }
+  /* Style pour le contrôle de volume */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.volume-control label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+#volume-slider {
+  width: 100px;
+  cursor: pointer;
+}
+
+#volume-display {
+  font-size: 14px;
+  font-weight: 600;
+  width: 45px;
+  text-align: center;
+}
+
+/* Style pour le slider personnalisé */
+#volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) 100%, #ddd 100%);
+  border-radius: 5px;
+  outline: none;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+  background: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.dark-mode .volume-control {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}

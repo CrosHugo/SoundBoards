@@ -11,6 +11,11 @@
     <header>
       <h1>Soundboard</h1>
       <div class="controls">
+        <div class="volume-control">
+          <label for="volume-slider">Volume:</label>
+          <input type="range" id="volume-slider" min="0" max="100" value="100">
+          <span id="volume-display">100%</span>
+        </div>
         <button id="add-sound-btn">Ajouter un son</button>
         <button id="edit-mode-btn">Mode édition</button>
         <button id="categories-btn">Catégories</button>

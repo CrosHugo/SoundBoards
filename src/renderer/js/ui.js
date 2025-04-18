@@ -7,6 +7,7 @@ class SoundboardUI {
     this.keyboardManager = null; // Sera initialisé après chargement des sons
     
     this.initEventListeners();
+    this.initVolumeControl();
   }
 
   initEventListeners() {
@@ -23,6 +24,7 @@ class SoundboardUI {
     // Événements pour les sons
     document.addEventListener('soundStarted', (e) => this.updateSoundButtonState(e.detail.id, true));
     document.addEventListener('soundEnded', (e) => this.updateSoundButtonState(e.detail.id, false));
+    document.addEventListener('volumeChanged', (e) => this.updateVolumeDisplay(e.detail.volume));
     document.addEventListener('soundStarted', (e) => {
         this.updateSoundButtonState(e.detail.id, true);
         this.updateStopButtonState();
@@ -38,6 +40,48 @@ class SoundboardUI {
     }
   }
 
+  initVolumeControl() {
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeDisplay = document.getElementById('volume-display');
+    
+    if (volumeSlider) {
+      // Définir la valeur initiale
+      const initialVolume = this.soundboard.getGlobalVolume();
+      volumeSlider.value = initialVolume * 100;
+      volumeDisplay.textContent = `${Math.round(initialVolume * 100)}%`;
+      
+      // Mettre à jour la couleur de fond du slider pour refléter la valeur actuelle
+      this.updateSliderBackground(volumeSlider);
+      
+      // Ajouter un écouteur d'événement pour les changements
+      volumeSlider.addEventListener('input', (e) => {
+        const newVolume = parseFloat(e.target.value) / 100;
+        this.soundboard.setGlobalVolume(newVolume);
+        volumeDisplay.textContent = `${Math.round(newVolume * 100)}%`;
+        
+        // Mettre à jour l'apparence du slider
+        this.updateSliderBackground(volumeSlider);
+      });
+    }
+  }
+  
+  updateVolumeDisplay(volume) {
+    const volumeSlider = document.getElementById('volume-slider');
+    const volumeDisplay = document.getElementById('volume-display');
+    
+    if (volumeSlider && volumeDisplay) {
+      volumeSlider.value = volume * 100;
+      volumeDisplay.textContent = `${Math.round(volume * 100)}%`;
+      this.updateSliderBackground(volumeSlider);
+    }
+  }
+  
+  updateSliderBackground(slider) {
+    // Mettre à jour le fond du slider pour refléter visuellement la valeur
+    const percent = slider.value;
+    slider.style.background = `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percent}%, #ddd ${percent}%)`;
+  }
+  
   async renderSoundboard() {
     // Vider le conteneur
     this.container.innerHTML = '';
