@@ -1,0 +1,216 @@
+{
+  "sounds": [
+    {
+      "id": "abviczr",
+      "name": "ah-il-est-lheure-daller-se-faire-enculer",
+      "file": "ah-il-est-lheure-daller-se-faire-enculer.mp3",
+      "color": "#d35400",
+      "icon": "🔊",
+      "shortcut": "1"
+    },
+    {
+      "id": "av2sujh",
+      "name": "betonniere-com",
+      "file": "betonniere-com.mp3",
+      "color": "#9b59b6",
+      "icon": "🔊"
+    },
+    {
+      "id": "xzc7jui",
+      "name": "bonk_AgRFvsD",
+      "file": "bonk_AgRFvsD.mp3",
+      "color": "#e74c3c",
+      "icon": "🔊"
+    },
+    {
+      "id": "vhtcy94",
+      "name": "ca-va-peter_nR3IwZJ",
+      "file": "ca-va-peter_nR3IwZJ.mp3",
+      "color": "#16a085",
+      "icon": "🔊"
+    },
+    {
+      "id": "3px3roo",
+      "name": "cadeaux",
+      "file": "cadeaux.mp3",
+      "color": "#9b59b6",
+      "icon": "🔊"
+    },
+    {
+      "id": "adxxg3k",
+      "name": "chinese-rap-song",
+      "file": "chinese-rap-song.mp3",
+      "color": "#e67e22",
+      "icon": "🔊"
+    },
+    {
+      "id": "9p7ez4r",
+      "name": "discord-call-sound",
+      "file": "discord-call-sound.mp3",
+      "color": "#1166d4",
+      "icon": "🔊",
+      "shortcut": ""
+    },
+    {
+      "id": "frd6jeh",
+      "name": "dry-fart",
+      "file": "dry-fart.mp3",
+      "color": "#16a085",
+      "icon": "🔊"
+    },
+    {
+      "id": "2tyocjo",
+      "name": "expressions-wtc-alerte-psychopathe_1",
+      "file": "expressions-wtc-alerte-psychopathe_1.mp3",
+      "color": "#3498db",
+      "icon": "🔊"
+    },
+    {
+      "id": "k2zc3sn",
+      "name": "gulp-gulp-gulp",
+      "file": "gulp-gulp-gulp.mp3",
+      "color": "#16a085",
+      "icon": "🔊"
+    },
+    {
+      "id": "bqxflzv",
+      "name": "hog-rider-aka-aiden-w",
+      "file": "hog-rider-aka-aiden-w.mp3",
+      "color": "#e67e22",
+      "icon": "🔊"
+    },
+    {
+      "id": "8fajoty",
+      "name": "hugooo",
+      "file": "hugooo.mp3",
+      "color": "#d35400",
+      "icon": "🔊"
+    },
+    {
+      "id": "rv3vobz",
+      "name": "i-am-atomic-resound",
+      "file": "i-am-atomic-resound.mp3",
+      "color": "#9b59b6",
+      "icon": "🔊"
+    },
+    {
+      "id": "h6ywqbo",
+      "name": "il-est-tombe",
+      "file": "il-est-tombe.mp3",
+      "color": "#16a085",
+      "icon": "🔊"
+    },
+    {
+      "id": "02trnk8",
+      "name": "img_6228",
+      "file": "img_6228.mp3",
+      "color": "#34495e",
+      "icon": "🔊"
+    },
+    {
+      "id": "mdvqg17",
+      "name": "la-place-de-la-femme-cest-a-la-cuisine_IIN8gAy",
+      "file": "la-place-de-la-femme-cest-a-la-cuisine_IIN8gAy.mp3",
+      "color": "#f39c12",
+      "icon": "🔊"
+    },
+    {
+      "id": "777jhc1",
+      "name": "leche-moi-les-couilles",
+      "file": "leche-moi-les-couilles.mp3",
+      "color": "#34495e",
+      "icon": "🔊"
+    },
+    {
+      "id": "7nhsno8",
+      "name": "les-congolais-sont-des-envahisseurs",
+      "file": "les-congolais-sont-des-envahisseurs.mp3",
+      "color": "#d35400",
+      "icon": "🔊"
+    },
+    {
+      "id": "gkhj17l",
+      "name": "nounours-mtm",
+      "file": "nounours-mtm.mp3",
+      "color": "#e67e22",
+      "icon": "🔊"
+    },
+    {
+      "id": "v1cogy4",
+      "name": "ouais-cest-greg",
+      "file": "ouais-cest-greg.mp3",
+      "color": "#34495e",
+      "icon": "🔊"
+    },
+    {
+      "id": "rshe5u7",
+      "name": "oui-je-suis-raciste",
+      "file": "oui-je-suis-raciste.mp3",
+      "color": "#2ecc71",
+      "icon": "🔊"
+    },
+    {
+      "id": "0rvsy3l",
+      "name": "pew_pew-dknight556-1379997159",
+      "file": "pew_pew-dknight556-1379997159.mp3",
+      "color": "#f39c12",
+      "icon": "🔊"
+    },
+    {
+      "id": "s8qgb39",
+      "name": "punch-sound-effect-meme",
+      "file": "punch-sound-effect-meme.mp3",
+      "color": "#e67e22",
+      "icon": "🔊"
+    },
+    {
+      "id": "w5jqq5y",
+      "name": "roblox-death-sound_1",
+      "file": "roblox-death-sound_1.mp3",
+      "color": "#2ecc71",
+      "icon": "🔊"
+    },
+    {
+      "id": "j0tgo7d",
+      "name": "super_smash_bros_brawl_theme",
+      "file": "super_smash_bros_brawl_theme.mp3",
+      "color": "#34495e",
+      "icon": "🔊"
+    },
+    {
+      "id": "2rm5mwb",
+      "name": "tu-fait-gonfler-mon-zizi-la",
+      "file": "tu-fait-gonfler-mon-zizi-la.mp3",
+      "color": "#16a085",
+      "icon": "🔊"
+    },
+    {
+      "id": "f60pvhs",
+      "name": "untitled_1071",
+      "file": "untitled_1071.mp3",
+      "color": "#f39c12",
+      "icon": "🔊"
+    },
+    {
+      "id": "72i5me0",
+      "name": "vine-boom",
+      "file": "vine-boom.mp3",
+      "color": "#3498db",
+      "icon": "🔊"
+    },
+    {
+      "id": "mi7mtr9",
+      "name": "yamate-kudesai",
+      "file": "yamate-kudesai.mp3",
+      "color": "#9b59b6",
+      "icon": "🔊"
+    },
+    {
+      "id": "1gihiwm",
+      "name": "youtube-uwuuuuu",
+      "file": "youtube-uwuuuuu.mp3",
+      "color": "#e67e22",
+      "icon": "🔊"
+    }
+  ]
+}
