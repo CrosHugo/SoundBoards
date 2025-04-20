@@ -323,6 +323,7 @@ class SoundboardUI {
       alert('Erreur lors de la sauvegarde: ' + (result.error || 'Erreur inconnue'));
     }
   }
+  
   stopAllSounds() {
     this.soundboard.stopAllSounds();
     this.updateStopButtonState();

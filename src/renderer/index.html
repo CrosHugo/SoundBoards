@@ -3,102 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soundboard Electron</title>
+  <title>SoundPad</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
   <div class="app-container">
     <header>
-      <h1>Soundboard</h1>
+      <div class="logo-container">
+        <img src="assets/icons/logo.svg" alt="SoundPad Logo" class="logo">
+        <h1>SoundPad</h1>
+      </div>
+      
       <div class="controls">
         <div class="volume-control">
-          <label for="volume-slider">Volume:</label>
+          <span class="volume-icon">🔊</span>
           <input type="range" id="volume-slider" min="0" max="100" value="100">
           <span id="volume-display">100%</span>
         </div>
-        <button id="add-sound-btn">Ajouter un son</button>
-        <button id="edit-mode-btn">Mode édition</button>
-        <button id="categories-btn">Catégories</button>
-        <button id="keyboard-btn">Raccourcis</button>
-        <button id="stop-all-btn" class="stop-btn">Arrêter tout</button>
+        
+        <div class="controls-buttons">
+          <button id="add-sound-btn" class="primary-btn">
+            <span class="icon">➕</span>
+            <span class="label">Ajouter</span>
+          </button>
+          
+          <button id="edit-mode-btn" class="toggle-btn">
+            <span class="icon">✏️</span>
+            <span class="label">Éditer</span>
+          </button>
+          
+          <button id="keyboard-btn" class="toggle-btn active">
+            <span class="icon">⌨️</span>
+            <span class="label">Raccourcis</span>
+          </button>
+          
+          <button id="stop-all-btn" class="action-btn">
+            <span class="icon">⏹️</span>
+            <span class="label">Stop</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main>
-      <div id="categories-container">
-        <!-- Les catégories seront ajoutées ici dynamiquement -->
+      <div class="sidebar">
+        <div class="categories-header">
+          <h3>Catégories</h3>
+          <button id="add-category-btn" class="small-btn">+</button>
+        </div>
+        
+        <div id="categories-list">
+          <div class="category-item active" data-id="all">
+            <span class="category-name">Tous les sons</span>
+            <span class="category-count">0</span>
+          </div>
+          <!-- Les catégories seront ajoutées ici dynamiquement -->
+        </div>
       </div>
-      <div id="soundboard-container">
-        <!-- Les boutons de sons seront ajoutés ici dynamiquement -->
+      
+      <div class="content">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Rechercher un son...">
+          <button id="clear-search" class="icon-btn">❌</button>
+        </div>
+        
+        <div id="soundboard-container" class="sound-grid">
+          <!-- Les boutons de sons seront ajoutés ici dynamiquement -->
+        </div>
       </div>
     </main>
 
-    <div id="config-panel" class="hidden">
-      <h2>Configuration</h2>
-      <div id="config-content">
-        <!-- Le contenu de configuration sera ajouté ici dynamiquement -->
+    <footer>
+      <div class="status-bar">
+        <span id="status-message">Prêt</span>
+        <div class="right-status">
+          <button id="settings-btn" class="icon-btn">⚙️</button>
+          <button id="theme-toggle" class="icon-btn">🌙</button>
+        </div>
       </div>
-      <div class="config-controls">
-        <button id="save-config-btn">Sauvegarder</button>
-        <button id="close-config-btn">Fermer</button>
-      </div>
-    </div>
+    </footer>
   </div>
 
-  <div id="theme-toggle">🌙</div>
-
-  <!-- Modal pour l'ajout et l'édition de sons -->
+  <!-- Modal d'ajout/édition de son -->
   <div id="sound-modal" class="modal hidden">
     <div class="modal-content">
       <div class="modal-header">
         <h3 id="modal-title">Ajouter un son</h3>
-        <span class="close-modal">&times;</span>
+        <button class="close-modal">×</button>
       </div>
+      
       <div class="modal-body">
         <form id="sound-form">
           <div class="form-group">
             <label for="sound-file">Fichier audio</label>
             <div class="file-input-container">
-              <input type="file" id="sound-file" accept=".mp3,.wav,.ogg">
-              <button type="button" id="browse-btn">Parcourir</button>
+              <button type="button" id="browse-btn" class="secondary-btn">Parcourir</button>
+              <span id="selected-file">Aucun fichier sélectionné</span>
             </div>
-            <span id="selected-file">Aucun fichier sélectionné</span>
           </div>
+          
           <div class="form-group">
             <label for="sound-name">Nom du son</label>
             <input type="text" id="sound-name" placeholder="Nom affiché">
           </div>
-          <div class="form-group">
-            <label for="sound-icon">Icône</label>
-            <input type="text" id="sound-icon" placeholder="Emoji ou caractère">
+          
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="sound-icon">Icône</label>
+              <input type="text" id="sound-icon" placeholder="Emoji ou icône">
+            </div>
+            
+            <div class="form-group half">
+              <label for="sound-color">Couleur</label>
+              <input type="color" id="sound-color" value="#3498db">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="sound-category">Catégorie</label>
-            <select id="sound-category">
-              <option value="">Sans catégorie</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sound-shortcut">Raccourci clavier</label>
-            <input type="text" id="sound-shortcut" placeholder="Appuyez sur une touche" readonly>
-          </div>
-          <div class="form-group">
-            <label for="sound-color">Couleur</label>
-            <input type="color" id="sound-color">
+          
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="sound-category">Catégorie</label>
+              <select id="sound-category">
+                <option value="">Sans catégorie</option>
+              </select>
+            </div>
+            
+            <div class="form-group half">
+              <label for="sound-shortcut">Raccourci clavier</label>
+              <input type="text" id="sound-shortcut" placeholder="Appuyez sur une touche" readonly>
+            </div>
           </div>
         </form>
       </div>
+      
       <div class="modal-footer">
-        <button id="cancel-sound">Annuler</button>
-        <button id="save-sound">Sauvegarder</button>
+        <button id="cancel-sound" class="secondary-btn">Annuler</button>
+        <button id="save-sound" class="primary-btn">Sauvegarder</button>
       </div>
     </div>
   </div>
 
-  <!-- Script pour Howler.js via CDN -->
+  <!-- Modal pour les catégories -->
+  <div id="category-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="category-modal-title">Ajouter une catégorie</h3>
+        <button class="close-modal">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="category-form">
+          <div class="form-group">
+            <label for="category-name">Nom de la catégorie</label>
+            <input type="text" id="category-name" placeholder="Nom de la catégorie">
+          </div>
+          
+          <div class="form-group">
+            <label for="category-color">Couleur</label>
+            <input type="color" id="category-color" value="#3498db">
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="cancel-category" class="secondary-btn">Annuler</button>
+        <button id="save-category" class="primary-btn">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour les paramètres -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Paramètres</h3>
+        <button class="close-modal">×</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="general">Général</button>
+          <button class="tab-btn" data-tab="keyboard">Raccourcis</button>
+          <button class="tab-btn" data-tab="about">À propos</button>
+        </div>
+        
+        <div class="tab-content active" data-tab="general">
+          <div class="form-group">
+            <label for="setting-theme">Thème</label>
+            <select id="setting-theme">
+              <option value="light">Clair</option>
+              <option value="dark">Sombre</option>
+              <option value="system">Système</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="setting-autoplay">Lecture automatique</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="setting-autoplay" checked>
+              <label for="setting-autoplay"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content" data-tab="keyboard">
+          <div class="form-group">
+            <label>Raccourcis globaux</label>
+            <div class="keyboard-list">
+              <div class="keyboard-item">
+                <span class="key">Échap</span>
+                <span class="action">Arrêter tous les sons</span>
+              </div>
+              <div class="keyboard-item">
+                <span class="key">Ctrl+S</span>
+                <span class="action">Sauvegarder la configuration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-content" data-tab="about">
+          <div class="about-content">
+            <h4>SoundPad</h4>
+            <p>Version 1.0.0</p>
+            <p>Une application de soundboard développée avec Electron.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="close-settings" class="primary-btn">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chargement de Howler -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
   
-  <!-- Chargement des scripts -->
+  <!-- Scripts de l'application -->
+  <script src="js/utils.js"></script>
   <script src="js/soundboard.js"></script>
   <script src="js/keyboard.js"></script>
   <script src="js/ui.js"></script>

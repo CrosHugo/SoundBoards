@@ -1,42 +1,56 @@
-// Attendre que le DOM soit chargé
+/**
+ * Point d'entrée principal de l'application Soundboard
+ * Initialise les composants et configure l'interface utilisateur
+ */
 document.addEventListener('DOMContentLoaded', async () => {
-    // Créer l'instance de Soundboard
-    const soundboard = new Soundboard();
-    
-    // Initialiser la soundboard
-    await soundboard.initialize();
-    
-    // Créer l'interface utilisateur
-    const ui = new SoundboardUI(soundboard);
-    
-    // Afficher la soundboard
-    await ui.renderSoundboard();
-    
-    // Initialiser les événements de la modal
-    initModalEvents();
-    
-    // Exposer les instances globalement pour le débogage (à retirer en production)
-    window.appSoundboard = soundboard;
-    window.appUI = ui;
+  // Créer et initialiser l'instance de Soundboard
+  const soundboard = new Soundboard();
+  await soundboard.initialize();
+  
+  // Créer et configurer l'interface utilisateur
+  const ui = new SoundboardUI(soundboard);
+  await ui.renderSoundboard();
+  
+  // Initialiser les événements du formulaire modal
+  initModalEvents();
+  
+  // Exposer les instances pour le débogage (à retirer en production)
+  if (process.env.NODE_ENV !== 'production') {
+      window.appSoundboard = soundboard;
+      window.appUI = ui;
+  }
+});
+
+/**
+* Initialise les événements associés à la modal d'ajout/édition de son
+*/
+function initModalEvents() {
+  // Gestion du bouton parcourir pour sélectionner un fichier
+  const browseBtn = document.getElementById('browse-btn');
+  browseBtn?.addEventListener('click', () => {
+      document.getElementById('sound-file').click();
   });
   
-  // Fonction pour initialiser les événements de la modal
-  function initModalEvents() {
-    // Gestion du bouton parcourir
-    document.getElementById('browse-btn').addEventListener('click', () => {
-      document.getElementById('sound-file').click();
-    });
-    
-    // Afficher le nom du fichier sélectionné
-    document.getElementById('sound-file').addEventListener('change', (e) => {
+  // Afficher le nom du fichier sélectionné
+  const soundFileInput = document.getElementById('sound-file');
+  soundFileInput?.addEventListener('change', (e) => {
       if (e.target.files.length > 0) {
-        document.getElementById('selected-file').textContent = e.target.files[0].name;
+          document.getElementById('selected-file').textContent = e.target.files[0].name;
       }
-    });
-    
-    // Gestion de l'input de raccourci clavier
-    document.getElementById('sound-shortcut').addEventListener('keydown', (e) => {
+  });
+  
+  // Configuraton de l'input de raccourci clavier
+  const shortcutInput = document.getElementById('sound-shortcut');
+  shortcutInput?.addEventListener('keydown', (e) => {
       e.preventDefault();
+      e.stopPropagation();
+      
+      // Ignorer les touches de modification seules
+      if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) {
+          return;
+      }
+      
+      // Enregistrer la touche
       e.target.value = e.key;
-    });
-  }
+  });
+}

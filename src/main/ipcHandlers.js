@@ -1,33 +1,59 @@
-const { ipcMain } = require('electron');
+const { ipcMain, dialog } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const { CONFIG } = require('../common/config');
 
 function registerIpcHandlers() {
   // Lister les fichiers audio disponibles
   ipcMain.handle('list-sound-files', async () => {
-    const soundsDir = path.join(__dirname, '../renderer/assets/sounds');
-    
     try {
-      // Vérifier si le dossier existe
-      if (!fs.existsSync(soundsDir)) {
-        fs.mkdirSync(soundsDir, { recursive: true });
+      // S'assurer que le répertoire existe
+      if (!fs.existsSync(CONFIG.SOUNDS_DIRECTORY)) {
+        fs.mkdirSync(CONFIG.SOUNDS_DIRECTORY, { recursive: true });
         return [];
       }
       
-      const files = fs.readdirSync(soundsDir);
+      const files = fs.readdirSync(CONFIG.SOUNDS_DIRECTORY);
       return files.filter(file => {
         const ext = path.extname(file).toLowerCase();
-        return ['.mp3', '.wav', '.ogg'].includes(ext);
+        return CONFIG.SUPPORTED_AUDIO_FILES.includes(ext);
       });
     } catch (error) {
-      console.error('Erreur lors de la lecture du dossier de sons:', error);
+      console.error('Erreur lors de la lecture du dossier des sons:', error);
       return [];
     }
   });
   
   // Obtenir le chemin complet d'un fichier audio
   ipcMain.handle('get-sound-path', async (event, filename) => {
-    return path.join(__dirname, '../renderer/assets/sounds', filename);
+    return path.join(CONFIG.SOUNDS_DIRECTORY, filename);
+  });
+  
+  // Sélectionner un fichier audio à importer
+  ipcMain.handle('select-audio-file', async () => {
+    const result = await dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: [
+        { name: 'Fichiers audio', extensions: CONFIG.SUPPORTED_AUDIO_FILES.map(ext => ext.slice(1)) }
+      ]
+    });
+    
+    if (result.canceled || result.filePaths.length === 0) {
+      return null;
+    }
+    
+    const filePath = result.filePaths[0];
+    const filename = path.basename(filePath);
+    
+    // Copier le fichier dans le dossier des sons
+    try {
+      const targetPath = path.join(CONFIG.SOUNDS_DIRECTORY, filename);
+      fs.copyFileSync(filePath, targetPath);
+      return filename;
+    } catch (error) {
+      console.error('Erreur lors de la copie du fichier:', error);
+      return null;
+    }
   });
   
   // Sauvegarder la configuration
@@ -52,11 +78,11 @@ function registerIpcHandlers() {
         const configData = fs.readFileSync(configPath, 'utf8');
         return JSON.parse(configData);
       } else {
-        return { sounds: [] };
+        return CONFIG.DEFAULT_CONFIG;
       }
     } catch (error) {
       console.error('Erreur lors du chargement de la configuration:', error);
-      return { sounds: [] };
+      return CONFIG.DEFAULT_CONFIG;
     }
   });
 }
